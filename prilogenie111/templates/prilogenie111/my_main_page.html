@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Тестирование AJAX POST</title>
+</head>
+<body>
+
+<h2>Тестирование AJAX POST</h2>
+<hr>
+<br>
+
+<p>Число А</p>
+<input type = "text" id = "aaa">
+<p>Число Б</p>
+<input type = "text" id = "bbb">
+<br>
+<br>
+<input type = "button" onclick="f()" value = "Получить произведение">
+
+<script>
+    function f() {
+        const a = document.getElementById("aaa").value;
+        const b = document.getElementById("bbb").value;
+        const body = "_" + a + "_" + b + "_";
+        const url = "/get_proizved/" + Math.random();
+
+        console.log("----------------------------------");
+        console.log("URL: " + url);
+        console.log("Body: " + body);
+
+        let r = new XMLHttpRequest();
+        r.open("POST", url, true);
+        r.setRequestHeader("Content-Type","text/plain;charset=UTF-8");
+        r.send(body);
+        r.onreadystatechange = function() {
+            if(r.readyState === 4 && r.status === 200) {
+                alert(r.responseText);
+                r = null;
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
